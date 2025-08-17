@@ -1,0 +1,1 @@
+-- V2 creates menu_items table already present in V1; this is a safe no-op placeholder to ensure ordering

@@ -1,0 +1,7 @@
+com/swifteats/catalog/repo/MenuItemRepository.class
+com/swifteats/catalog/model/MenuItem.class
+com/swifteats/catalog/PingController.class
+com/swifteats/catalog/controller/CatalogController.class
+com/swifteats/catalog/dto/MenuItemDto.class
+com/swifteats/catalog/config/CacheConfig.class
+com/swifteats/catalog/CatalogApplication.class

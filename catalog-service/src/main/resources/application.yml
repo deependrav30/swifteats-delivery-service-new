@@ -1,0 +1,26 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: catalog-service
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:-postgres}:5432/${POSTGRES_DB:-swifteatsdb}
+    username: ${POSTGRES_USER:-swifteats}
+    password: ${POSTGRES_PASSWORD:-swifteats}
+  redis:
+    host: ${REDIS_HOST:-redis}
+    port: ${REDIS_PORT:-6379}
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+catalog:
+  cache:
+    restaurantMenuTtlMinutes: ${CATALOG_MENU_TTL_MINUTES:5}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

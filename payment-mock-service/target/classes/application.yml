@@ -1,0 +1,16 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: payment-mock-service
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+payment:
+  failure-rate: ${PAYMENT_FAILURE_RATE:0.0}
+  latency-ms: ${PAYMENT_LATENCY_MS:100}
