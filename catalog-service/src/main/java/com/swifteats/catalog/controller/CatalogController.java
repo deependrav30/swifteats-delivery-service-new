@@ -1,36 +1,44 @@
 package com.swifteats.catalog.controller;
 
-import com.swifteats.catalog.model.MenuItem;
-import com.swifteats.catalog.repo.MenuItemRepository;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
+import com.swifteats.catalog.dto.MenuItemDto;
+import com.swifteats.catalog.dto.RestaurantDto;
+import com.swifteats.catalog.service.CatalogService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
 @RequestMapping("/restaurants")
 public class CatalogController {
 
-    private final MenuItemRepository repo;
+    private final CatalogService catalogService;
 
-    public CatalogController(MenuItemRepository repo) {
-        this.repo = repo;
+    public CatalogController(CatalogService catalogService) {
+        this.catalogService = catalogService;
     }
 
     @GetMapping("/{id}/menu")
-    @Cacheable(value = "restaurantMenu", key = "#id")
-    public ResponseEntity<List<MenuItem>> getMenu(@PathVariable("id") Long id) {
-        List<MenuItem> menu = repo.findByRestaurantId(id);
-        return ResponseEntity.ok(menu);
+    public ResponseEntity<List<MenuItemDto>> getMenu(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(catalogService.getMenu(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<RestaurantDto> createRestaurant(@RequestBody RestaurantDto dto) {
+        RestaurantDto created = catalogService.createRestaurant(dto);
+        return ResponseEntity.created(URI.create("/restaurants/" + created.getId())).body(created);
+    }
+
+    @PutMapping("/{id}/menu")
+    public ResponseEntity<List<MenuItemDto>> replaceMenu(@PathVariable("id") Long id, @RequestBody List<MenuItemDto> menu) {
+        List<MenuItemDto> updated = catalogService.replaceMenu(id, menu);
+        return ResponseEntity.ok(updated);
     }
 
     @PostMapping("/{id}/menu")
-    @CacheEvict(value = "restaurantMenu", key = "#id")
-    public ResponseEntity<MenuItem> addMenuItem(@PathVariable("id") Long id, @RequestBody MenuItem item) {
-        item.setRestaurantId(id);
-        MenuItem saved = repo.save(item);
+    public ResponseEntity<MenuItemDto> addMenuItem(@PathVariable("id") Long id, @RequestBody MenuItemDto item) {
+        MenuItemDto saved = catalogService.addMenuItem(id, item);
         return ResponseEntity.ok(saved);
     }
 }

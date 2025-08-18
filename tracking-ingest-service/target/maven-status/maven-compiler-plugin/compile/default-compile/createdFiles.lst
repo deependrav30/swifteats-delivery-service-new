@@ -1,2 +1,4 @@
 com/swifteats/tracking/ingest/TrackingIngestApplication.class
+com/swifteats/tracking/amqp/RabbitConnectionFactoryConfig.class
+com/swifteats/tracking/ingest/controller/PingController.class
 com/swifteats/tracking/ingest/PingController.class

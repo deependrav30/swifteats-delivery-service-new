@@ -14,3 +14,10 @@ management:
 payment:
   failure-rate: ${PAYMENT_FAILURE_RATE:0.0}
   latency-ms: ${PAYMENT_LATENCY_MS:100}
+
+spring:
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USER:guest}
+    password: ${RABBITMQ_PASS:guest}

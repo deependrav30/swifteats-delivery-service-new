@@ -19,6 +19,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <testcontainers.version>1.19.0</testcontainers.version>
         <maven.surefire.plugin.version>3.0.0-M7</maven.surefire.plugin.version>
+        <mockito.inline.version>4.11.0</mockito.inline.version>
     </properties>
 
     <dependencyManagement>
@@ -38,6 +39,16 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <!-- Test-only dependencies inherited by modules -->
+    <dependencies>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-inline</artifactId>
+            <version>${mockito.inline.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <pluginManagement>
@@ -79,6 +90,18 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+
+        <!-- Ensure these plugins run for each module by placing them under build/plugins (inherited) -->
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven.surefire.plugin.version}</version>
+                <configuration>
+                    <failIfNoTests>false</failIfNoTests>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 
     <modules>

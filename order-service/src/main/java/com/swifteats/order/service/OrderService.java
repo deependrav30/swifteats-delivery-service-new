@@ -42,6 +42,8 @@ public class OrderService {
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
+        event.setAttempts(0);
+        event.setStatus("PENDING");
         outboxRepository.save(event);
 
         return saved;

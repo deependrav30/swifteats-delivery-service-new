@@ -1,15 +1,11 @@
 package com.swifteats.order;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.util.Map;
 
-@RestController
+/** Non-bean ping provider to avoid duplicate bean registration. */
 public class PingController {
 
-    @GetMapping("/ping")
-    public Map<String, String> ping() {
+    public static Map<String, String> ping() {
         return Map.of("status", "pong", "service", "order");
     }
 }

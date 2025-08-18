@@ -11,15 +11,21 @@ public class MenuItem {
     private Long id;
 
     @Column(nullable = false)
-    private Long restaurantId;
-
-    @Column(nullable = false)
     private String name;
 
     @Column(nullable = false)
-    private Long priceCents;
+    private Integer priceCents;
 
-    // getters and setters
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id")
+    private Restaurant restaurant;
+
+    public MenuItem() {}
+
+    public MenuItem(String name, Integer priceCents) {
+        this.name = name;
+        this.priceCents = priceCents;
+    }
 
     public Long getId() {
         return id;
@@ -27,14 +33,6 @@ public class MenuItem {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getRestaurantId() {
-        return restaurantId;
-    }
-
-    public void setRestaurantId(Long restaurantId) {
-        this.restaurantId = restaurantId;
     }
 
     public String getName() {
@@ -45,11 +43,19 @@ public class MenuItem {
         this.name = name;
     }
 
-    public Long getPriceCents() {
+    public Integer getPriceCents() {
         return priceCents;
     }
 
-    public void setPriceCents(Long priceCents) {
+    public void setPriceCents(Integer priceCents) {
         this.priceCents = priceCents;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 }

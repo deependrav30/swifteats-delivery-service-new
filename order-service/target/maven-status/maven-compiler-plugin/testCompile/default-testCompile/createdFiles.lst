@@ -1,2 +1,5 @@
+com/swifteats/order/testsupport/PaymentMockTestListener.class
+com/swifteats/order/PaymentFlowIntegrationTest.class
+com/swifteats/order/TestContainersBase.class
 com/swifteats/order/IntegrationTest.class
 com/swifteats/order/OutboxIntegrationTest.class

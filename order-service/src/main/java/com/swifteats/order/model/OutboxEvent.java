@@ -28,6 +28,14 @@ public class OutboxEvent {
 
     private boolean published = false;
 
+    @Column(nullable = false)
+    private int attempts = 0;
+
+    private Instant lastAttemptAt;
+
+    @Column(nullable = false)
+    private String status = "PENDING";
+
     // getters/setters
 
     public Long getId() { return id; }
@@ -44,4 +52,10 @@ public class OutboxEvent {
     public void setCreatedAt(Instant createdAt) { this.createdAt = createdAt; }
     public boolean isPublished() { return published; }
     public void setPublished(boolean published) { this.published = published; }
+    public int getAttempts() { return attempts; }
+    public void setAttempts(int attempts) { this.attempts = attempts; }
+    public Instant getLastAttemptAt() { return lastAttemptAt; }
+    public void setLastAttemptAt(Instant lastAttemptAt) { this.lastAttemptAt = lastAttemptAt; }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }

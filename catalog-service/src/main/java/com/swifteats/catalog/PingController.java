@@ -1,15 +1,14 @@
 package com.swifteats.catalog;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.util.Map;
 
-@RestController
+/**
+ * Utility Ping provider — not a Spring bean. The actual REST endpoint lives in
+ * com.swifteats.catalog.controller.PingController to avoid duplicate bean names.
+ */
 public class PingController {
 
-    @GetMapping("/ping")
-    public Map<String, String> ping() {
+    public static Map<String, String> ping() {
         return Map.of("status", "pong", "service", "catalog");
     }
 }

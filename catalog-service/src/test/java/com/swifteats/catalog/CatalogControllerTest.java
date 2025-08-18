@@ -1,8 +1,8 @@
 package com.swifteats.catalog;
 
 import com.swifteats.catalog.controller.CatalogController;
-import com.swifteats.catalog.model.MenuItem;
-import com.swifteats.catalog.repo.MenuItemRepository;
+import com.swifteats.catalog.dto.MenuItemDto;
+import com.swifteats.catalog.service.CatalogService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.http.ResponseEntity;
@@ -16,17 +16,13 @@ public class CatalogControllerTest {
 
     @Test
     public void testGetMenu() {
-        MenuItem item = new MenuItem();
-        item.setId(1L);
-        item.setRestaurantId(42L);
-        item.setName("Burger");
-        item.setPriceCents(499L);
+        MenuItemDto item = new MenuItemDto(1L, "Burger", 499);
 
-        MenuItemRepository repo = Mockito.mock(MenuItemRepository.class);
-        when(repo.findByRestaurantId(42L)).thenReturn(List.of(item));
+        CatalogService service = Mockito.mock(CatalogService.class);
+        when(service.getMenu(42L)).thenReturn(List.of(item));
 
-        CatalogController controller = new CatalogController(repo);
-        ResponseEntity<List<MenuItem>> resp = controller.getMenu(42L);
+        CatalogController controller = new CatalogController(service);
+        ResponseEntity<List<MenuItemDto>> resp = controller.getMenu(42L);
 
         assertThat(resp.getBody()).hasSize(1);
         assertThat(resp.getBody().get(0).getName()).isEqualTo("Burger");

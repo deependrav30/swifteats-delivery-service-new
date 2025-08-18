@@ -1,4 +1,6 @@
 com/swifteats/catalog/CatalogIntegrationTest.class
 com/swifteats/catalog/CacheConfigTest.class
 com/swifteats/catalog/CatalogControllerTest.class
+com/swifteats/catalog/TestContainersBase.class
+com/swifteats/catalog/CatalogCacheIntegrationTest.class
 com/swifteats/catalog/IntegrationTest.class
