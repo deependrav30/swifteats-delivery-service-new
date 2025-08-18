@@ -7,6 +7,9 @@ spring:
     name: simulator
   lifecycle:
     timeout-per-shutdown-phase: 30s
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
 
 management:
   endpoints:

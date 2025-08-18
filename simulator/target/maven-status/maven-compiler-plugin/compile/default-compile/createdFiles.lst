@@ -1,2 +1,6 @@
-com/swifteats/simulator/PingController.class
+com/swifteats/simulator/dto/DriverLocationDto.class
 com/swifteats/simulator/SimulatorApplication.class
+com/swifteats/simulator/SimConfig.class
+com/swifteats/simulator/SimulatorController.class
+com/swifteats/simulator/PingController.class
+com/swifteats/simulator/SimulatorService.class

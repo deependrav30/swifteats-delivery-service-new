@@ -74,3 +74,92 @@ Shared Testcontainers base
 
 CI
 - Ensure your CI runner supports Docker (GitHub-hosted runners do). A sample GitHub Actions workflow is included in `.github/workflows/integration-tests.yml` to run the module tests.
+
+## Simulator
+
+Run simulator module locally:
+
+- Start simulator:
+
+  ```bash
+  ./mvnw -pl :simulator spring-boot:run
+  ```
+
+- Start simulation (HTTP mode, default ingest url localhost:8085):
+
+  ```bash
+  curl -X POST http://localhost:8086/simulator/start -H 'Content-Type: application/json' -d '{"drivers":10,"updatesPerSecond":2,"mode":"http","ingestUrl":"http://localhost:8085/tracking/location"}'
+  ```
+
+- Start simulation (Rabbit mode):
+
+  ```bash
+  curl -X POST http://localhost:8086/simulator/start -H 'Content-Type: application/json' -d '{"drivers":10,"updatesPerSecond":2,"mode":"rabbit","rabbitHost":"localhost","rabbitPort":5672,"rabbitExchange":"driver.location.v1"}'
+  ```
+
+- Stop simulation:
+
+  ```bash
+  curl -X POST http://localhost:8086/simulator/stop
+  ```
+
+## Demo quickstart (quick commands)
+
+Environment variables (example):
+
+```bash
+POSTGRES_HOST=localhost
+POSTGRES_DB=swifteatsdb
+POSTGRES_USER=swifteats
+POSTGRES_PASSWORD=swifteats
+REDIS_HOST=localhost
+REDIS_PORT=6379
+RABBITMQ_HOST=localhost
+RABBITMQ_USER=guest
+RABBITMQ_PASS=guest
+CATALOG_PORT=18081
+```
+
+Start infra:
+
+```bash
+docker compose up -d
+```
+
+Start the catalog service for a quick demo (disables Flyway for fast startup):
+
+```bash
+POSTGRES_HOST=localhost POSTGRES_DB=swifteatsdb POSTGRES_USER=swifteats POSTGRES_PASSWORD=swifteats \
+REDIS_HOST=localhost REDIS_PORT=6379 SPRING_FLYWAY_ENABLED=false SERVER_PORT=18081 \
+./mvnw -pl :catalog-service spring-boot:run
+```
+
+Demo curl commands:
+
+- Health / ping
+
+```bash
+curl http://localhost:18081/ping
+```
+
+- Get menu (cached, Redis key `restaurantMenu::{id}`):
+
+```bash
+curl http://localhost:18081/restaurants/1/menu
+```
+
+- Create restaurant (evicts cache on writes):
+
+```bash
+curl -X POST -H "Content-Type: application/json" \
+  -d '{"name":"Demo Pizza","menu":[{"name":"Margherita","priceCents":799}]}' \
+  http://localhost:18081/restaurants
+```
+
+Start other services (example):
+
+```bash
+./mvnw -pl :order-service spring-boot:run
+./mvnw -pl :tracking-ingest-service spring-boot:run
+./mvnw -pl :tracking-query-service spring-boot:run
+```

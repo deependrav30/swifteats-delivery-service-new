@@ -121,6 +121,12 @@ rabbitmq:
 - List DB indexes and Redis keys/TTLs used.
 - Confirm simulator can reach 50×10 eps locally.
 
+**Pending sub-steps (Phase 2 priority)**
+
+- A) Implement Catalog caching + tests (fast, isolated).
+- B) Implement Outbox poller + full order-service integration tests (core transactional guarantee).
+- C) Implement simulator multi-driver HTTP E2E (exercises tracking ingest + query SSE via Redis).
+
 **Return:**
 - Only updated/new files (full content). End with: `ACK: LOGIC-AND-TESTS-READY`.
 

@@ -7,6 +7,7 @@ import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -28,6 +29,9 @@ public class TrackingControllerTest {
     @MockBean
     private AmqpTemplate amqpTemplate;
 
+    @MockBean
+    private StringRedisTemplate redisTemplate;
+
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -45,11 +49,12 @@ public class TrackingControllerTest {
     @Test
     public void testPushLocationFailure() throws Exception {
         DriverLocationDto dto = new DriverLocationDto("driver-1", 18.5204, 73.8567, 12.3, Instant.now());
+        // if Rabbit publish fails, controller writes to Redis and still returns 202 Accepted
         doThrow(new RuntimeException("amqp down")).when(amqpTemplate).convertAndSend(eq("driver.location.v1"), eq("driver.driver-1"), any(DriverLocationDto.class));
 
         mvc.perform(post("/tracking/location")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(dto)))
-                .andExpect(status().isBadGateway());
+                .andExpect(status().isAccepted());
     }
 }

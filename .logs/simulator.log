@@ -1,0 +1,49 @@
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m----------------------< [0;36mcom.swifteats:simulator[0;1m >-----------------------[m
+[[1;34mINFO[m] [1mBuilding simulator 0.1.0-SNAPSHOT[m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m>>> [0;32mspring-boot-maven-plugin:3.5.2:run[m [1m(default-cli)[0;1m > [0;1mtest-compile[m @ [36msimulator[0;1m >>>[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:2.6:resources[m [1m(default-resources)[m @ [36msimulator[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] Copying 1 resource
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.10.1:compile[m [1m(default-compile)[m @ [36msimulator[0;1m ---[m
+[[1;34mINFO[m] Nothing to compile - all classes are up to date
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:2.6:testResources[m [1m(default-testResources)[m @ [36msimulator[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] skip non existing resourceDirectory /Users/deependraverma/Documents/Projects/AI/swifteats-delivery-service-new/simulator/src/test/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.10.1:testCompile[m [1m(default-testCompile)[m @ [36msimulator[0;1m ---[m
+[[1;34mINFO[m] No sources to compile
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m<<< [0;32mspring-boot-maven-plugin:3.5.2:run[m [1m(default-cli)[0;1m < [0;1mtest-compile[m @ [36msimulator[0;1m <<<[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mspring-boot-maven-plugin:3.5.2:run[m [1m(default-cli)[m @ [36msimulator[0;1m ---[m
+[[1;34mINFO[m] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.2)
+
+2025-08-18T21:13:12.990+05:30  INFO 93667 --- [simulator] [           main] c.s.simulator.SimulatorApplication       : Starting SimulatorApplication using Java 21.0.3 with PID 93667 (/Users/deependraverma/Documents/Projects/AI/swifteats-delivery-service-new/simulator/target/classes started by deependraverma in /Users/deependraverma/Documents/Projects/AI/swifteats-delivery-service-new/simulator)
+2025-08-18T21:13:12.990+05:30  INFO 93667 --- [simulator] [           main] c.s.simulator.SimulatorApplication       : No active profile set, falling back to 1 default profile: "default"
+2025-08-18T21:13:13.261+05:30  INFO 93667 --- [simulator] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8086 (http)
+2025-08-18T21:13:13.266+05:30  INFO 93667 --- [simulator] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-18T21:13:13.266+05:30  INFO 93667 --- [simulator] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-08-18T21:13:13.281+05:30  INFO 93667 --- [simulator] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-18T21:13:13.282+05:30  INFO 93667 --- [simulator] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 280 ms
+2025-08-18T21:13:13.463+05:30  INFO 93667 --- [simulator] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8086 (http) with context path '/'
+2025-08-18T21:13:13.467+05:30  INFO 93667 --- [simulator] [           main] c.s.simulator.SimulatorApplication       : Started SimulatorApplication in 0.612 seconds (process running for 0.71)
+2025-08-18T21:13:13.927+05:30  INFO 93667 --- [simulator] [nio-8086-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-18T21:13:13.927+05:30  INFO 93667 --- [simulator] [nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-08-18T21:13:13.928+05:30  INFO 93667 --- [simulator] [nio-8086-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms

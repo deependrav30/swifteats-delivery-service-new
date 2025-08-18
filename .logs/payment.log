@@ -1,0 +1,54 @@
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m-----------------< [0;36mcom.swifteats:payment-mock-service[0;1m >-----------------[m
+[[1;34mINFO[m] [1mBuilding payment-mock-service 0.1.0-SNAPSHOT[m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m>>> [0;32mspring-boot-maven-plugin:3.5.2:run[m [1m(default-cli)[0;1m > [0;1mtest-compile[m @ [36mpayment-mock-service[0;1m >>>[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:2.6:resources[m [1m(default-resources)[m @ [36mpayment-mock-service[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] Copying 3 resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.10.1:compile[m [1m(default-compile)[m @ [36mpayment-mock-service[0;1m ---[m
+[[1;34mINFO[m] Changes detected - recompiling the module!
+[[1;34mINFO[m] Compiling 8 source files to /Users/deependraverma/Documents/Projects/AI/swifteats-delivery-service-new/payment-mock-service/target/classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:2.6:testResources[m [1m(default-testResources)[m @ [36mpayment-mock-service[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] skip non existing resourceDirectory /Users/deependraverma/Documents/Projects/AI/swifteats-delivery-service-new/payment-mock-service/src/test/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.10.1:testCompile[m [1m(default-testCompile)[m @ [36mpayment-mock-service[0;1m ---[m
+[[1;34mINFO[m] Changes detected - recompiling the module!
+[[1;34mINFO[m] Compiling 1 source file to /Users/deependraverma/Documents/Projects/AI/swifteats-delivery-service-new/payment-mock-service/target/test-classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m<<< [0;32mspring-boot-maven-plugin:3.5.2:run[m [1m(default-cli)[0;1m < [0;1mtest-compile[m @ [36mpayment-mock-service[0;1m <<<[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mspring-boot-maven-plugin:3.5.2:run[m [1m(default-cli)[m @ [36mpayment-mock-service[0;1m ---[m
+[[1;34mINFO[m] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.2)
+
+2025-08-18T21:10:07.696+05:30  INFO 89943 --- [payment-mock-service] [           main] c.s.paymentmock.PaymentMockApplication   : Starting PaymentMockApplication using Java 21.0.3 with PID 89943 (/Users/deependraverma/Documents/Projects/AI/swifteats-delivery-service-new/payment-mock-service/target/classes started by deependraverma in /Users/deependraverma/Documents/Projects/AI/swifteats-delivery-service-new/payment-mock-service)
+2025-08-18T21:10:07.696+05:30  INFO 89943 --- [payment-mock-service] [           main] c.s.paymentmock.PaymentMockApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-08-18T21:10:08.026+05:30  INFO 89943 --- [payment-mock-service] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8083 (http)
+2025-08-18T21:10:08.031+05:30  INFO 89943 --- [payment-mock-service] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-18T21:10:08.031+05:30  INFO 89943 --- [payment-mock-service] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-08-18T21:10:08.045+05:30  INFO 89943 --- [payment-mock-service] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-18T21:10:08.045+05:30  INFO 89943 --- [payment-mock-service] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 336 ms
+2025-08-18T21:10:08.283+05:30  INFO 89943 --- [payment-mock-service] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
+2025-08-18T21:10:08.311+05:30  INFO 89943 --- [payment-mock-service] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8083 (http) with context path '/'
+2025-08-18T21:10:08.312+05:30  INFO 89943 --- [payment-mock-service] [           main] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [localhost:5672]
+2025-08-18T21:10:08.342+05:30  INFO 89943 --- [payment-mock-service] [           main] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#4be0a27d:0/SimpleConnection@24a04257 [delegate=amqp://guest@127.0.0.1:5672/, localPort=58077]
+2025-08-18T21:10:08.365+05:30  INFO 89943 --- [payment-mock-service] [           main] c.s.paymentmock.PaymentMockApplication   : Started PaymentMockApplication in 0.804 seconds (process running for 0.902)
+2025-08-18T21:10:14.834+05:30  INFO 89943 --- [payment-mock-service] [nio-8083-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-18T21:10:14.834+05:30  INFO 89943 --- [payment-mock-service] [nio-8083-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-08-18T21:10:14.835+05:30  INFO 89943 --- [payment-mock-service] [nio-8083-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms

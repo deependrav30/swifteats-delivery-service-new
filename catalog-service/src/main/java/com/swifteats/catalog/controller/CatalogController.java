@@ -3,6 +3,7 @@ package com.swifteats.catalog.controller;
 import com.swifteats.catalog.dto.MenuItemDto;
 import com.swifteats.catalog.dto.RestaurantDto;
 import com.swifteats.catalog.service.CatalogService;
+import com.swifteats.catalog.config.CacheConfig;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,9 +11,10 @@ import java.net.URI;
 import java.util.List;
 
 /**
- * GET /restaurants/{id}/menu uses cache key: "catalog.restaurant.menu::<restaurantId>"
- * TTL is configured by property catalog.cache.restaurantMenuTtlMinutes (default 5) or
- * the CacheConfig sets 60 seconds for restaurantMenu cache.
+ * GET /restaurants/{id}/menu uses cache name: CacheConfig.RESTAURANT_MENU_CACHE
+ * Redis key pattern (Spring Cache default): "{cacheName}::{key}"
+ * For this endpoint the effective Redis key will be: "{CacheConfig.RESTAURANT_MENU_CACHE}::{restaurantId}"
+ * TTL is configured in CacheConfig (restaurantMenu TTL = 60 seconds).
  */
 @RestController
 @RequestMapping("/restaurants")

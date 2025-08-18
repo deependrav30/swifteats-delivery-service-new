@@ -1,5 +1,6 @@
 package com.swifteats.catalog.service;
 
+import com.swifteats.catalog.config.CacheConfig;
 import com.swifteats.catalog.dto.MenuItemDto;
 import com.swifteats.catalog.dto.RestaurantDto;
 import com.swifteats.catalog.model.MenuItem;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class CatalogService {
-    public static final String MENU_CACHE = "catalog.restaurant.menu";
+    // use the single source cache name from CacheConfig to ensure evict/cache work consistently
 
     private final RestaurantRepository restaurantRepository;
     private final MenuItemRepository menuItemRepository;
@@ -26,7 +27,7 @@ public class CatalogService {
         this.menuItemRepository = menuItemRepository;
     }
 
-    @Cacheable(value = MENU_CACHE, key = "#p0")
+    @Cacheable(value = CacheConfig.RESTAURANT_MENU_CACHE, key = "#p0")
     public List<MenuItemDto> getMenu(Long restaurantId) {
         List<MenuItem> items = menuItemRepository.findByRestaurantIdOrderByIdAsc(restaurantId);
         return items.stream().map(this::toDto).collect(Collectors.toList());
@@ -43,7 +44,7 @@ public class CatalogService {
     }
 
     @Transactional
-    @CacheEvict(value = MENU_CACHE, key = "#p0")
+    @CacheEvict(value = CacheConfig.RESTAURANT_MENU_CACHE, key = "#p0")
     public List<MenuItemDto> replaceMenu(Long restaurantId, List<MenuItemDto> newMenu) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow(() -> new IllegalArgumentException("Restaurant not found"));
         // clear existing
@@ -55,7 +56,7 @@ public class CatalogService {
     }
 
     @Transactional
-    @CacheEvict(value = MENU_CACHE, key = "#p0")
+    @CacheEvict(value = CacheConfig.RESTAURANT_MENU_CACHE, key = "#p0")
     public MenuItemDto addMenuItem(Long restaurantId, MenuItemDto itemDto) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow(() -> new IllegalArgumentException("Restaurant not found"));
         MenuItem item = new MenuItem(itemDto.getName(), itemDto.getPriceCents());

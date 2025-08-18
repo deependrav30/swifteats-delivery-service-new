@@ -1,15 +1,3 @@
-package com.swifteats.paymentmock;
+package com.swifteats.paymentmock.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Map;
-
-@RestController
-public class PingController {
-
-    @GetMapping("/ping")
-    public Map<String, String> ping() {
-        return Map.of("status", "pong", "service", "payment-mock");
-    }
-}
+// This file intentionally left blank to avoid duplicate PingController class. Use com.swifteats.paymentmock.controller.PingController

@@ -1,12 +1,11 @@
 package com.swifteats.tracking.ingest;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-@RestController
-public class PingController {
+// package-private helper to avoid creating a second Spring bean named 'pingController'
+class PingController {
 
     @GetMapping("/ping")
     public Map<String, String> ping() {

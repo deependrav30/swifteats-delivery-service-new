@@ -3,6 +3,5 @@ com/swifteats/paymentmock/PaymentMockApplication.class
 com/swifteats/paymentmock/service/PaymentMockService.class
 com/swifteats/paymentmock/dto/PaymentResponse.class
 com/swifteats/paymentmock/amqp/PaymentMessageListener.class
-com/swifteats/paymentmock/PingController.class
 com/swifteats/paymentmock/controller/PingController.class
 com/swifteats/paymentmock/dto/PaymentRequest.class

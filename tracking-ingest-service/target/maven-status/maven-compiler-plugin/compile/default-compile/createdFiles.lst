@@ -1,3 +1,4 @@
+com/swifteats/tracking/ingest/config/RabbitConfig.class
 com/swifteats/tracking/ingest/PingController.class
 com/swifteats/tracking/ingest/dto/DriverLocationDto.class
 com/swifteats/tracking/ingest/controller/TrackingController.class
