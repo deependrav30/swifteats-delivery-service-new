@@ -1,15 +1,14 @@
 package com.swifteats.tracking.query;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+/**
+ * Non-bean helper kept to avoid breaking existing references. This file is intentionally
+ * NOT annotated with @RestController so Spring won't register a second bean named
+ * 'pingController' (the real controller lives in com.swifteats.tracking.query.controller).
+ */
+public final class PingController {
+    private PingController() {}
 
-import java.util.Map;
-
-@RestController
-public class PingController {
-
-    @GetMapping("/ping")
-    public Map<String, String> ping() {
-        return Map.of("status", "pong", "service", "tracking-query");
+    public static java.util.Map<String, String> info() {
+        return java.util.Map.of("service", "tracking-query", "status", "ok");
     }
 }

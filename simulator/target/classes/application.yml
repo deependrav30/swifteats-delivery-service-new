@@ -1,9 +1,12 @@
 server:
   port: 8086
+  shutdown: graceful
 
 spring:
   application:
     name: simulator
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
 
 management:
   endpoints:

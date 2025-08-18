@@ -28,6 +28,13 @@
             <groupId>com.swifteats</groupId>
             <artifactId>common</artifactId>
         </dependency>
+
+        <!-- Test dependencies needed for WebMvcTest, JUnit 5, MockMvc -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 </project>

@@ -1,11 +1,12 @@
 server:
   port: 8085
+  shutdown: graceful
 
 spring:
   application:
     name: tracking-query-service
-
-spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
   redis:
     host: ${REDIS_HOST:-redis}
     port: ${REDIS_PORT:-6379}

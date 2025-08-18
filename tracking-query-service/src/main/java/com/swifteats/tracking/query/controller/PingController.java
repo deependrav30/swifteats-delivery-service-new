@@ -9,6 +9,6 @@ import java.util.Map;
 public class PingController {
     @GetMapping("/ping")
     public Map<String, String> ping() {
-        return Map.of("service","tracking-query","status","ok");
+        return Map.of("service", "tracking-query", "status", "ok");
     }
 }

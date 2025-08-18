@@ -1,3 +1,6 @@
+com/swifteats/tracking/query/controller/TrackingQueryController.class
 com/swifteats/tracking/query/TrackingQueryApplication.class
 com/swifteats/tracking/query/controller/PingController.class
+com/swifteats/tracking/query/RedisConfig.class
+com/swifteats/tracking/query/controller/TrackingQuerySseController.class
 com/swifteats/tracking/query/PingController.class

@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
+/**
+ * GET /restaurants/{id}/menu uses cache key: "catalog.restaurant.menu::<restaurantId>"
+ * TTL is configured by property catalog.cache.restaurantMenuTtlMinutes (default 5) or
+ * the CacheConfig sets 60 seconds for restaurantMenu cache.
+ */
 @RestController
 @RequestMapping("/restaurants")
 public class CatalogController {

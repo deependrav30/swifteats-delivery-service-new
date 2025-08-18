@@ -1,9 +1,12 @@
 server:
   port: 8080
+  shutdown: graceful
 
 spring:
   application:
     name: gateway
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
 
 management:
   endpoints:
