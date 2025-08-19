@@ -1,0 +1,2 @@
+data:{"driverId":"driver-123","latitude":12.34,"longitude":56.78,"speed":0.0,"timestamp":"2025-08-18T12:00:00Z"}
+

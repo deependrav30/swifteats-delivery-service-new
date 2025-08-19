@@ -1,0 +1,5 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+gateway,com.swifteats.gateway,GatewayApplication,8,0,0,0,3,0,2,0,2,0
+gateway,com.swifteats.gateway,PingController,6,0,0,0,1,0,1,0,1,0
+gateway,com.swifteats.gateway.controller,PingController,0,5,0,0,0,2,0,2,0,2
+gateway,com.swifteats.gateway.controller,ProxyController,12,60,3,3,3,11,4,3,1,3

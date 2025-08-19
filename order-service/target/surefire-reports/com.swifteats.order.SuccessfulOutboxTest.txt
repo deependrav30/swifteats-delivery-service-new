@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.swifteats.order.SuccessfulOutboxTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.301 s - in com.swifteats.order.SuccessfulOutboxTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.42 s - in com.swifteats.order.SuccessfulOutboxTest

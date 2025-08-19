@@ -13,6 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.util.List;
 
+import io.github.resilience4j.retry.annotation.Retry;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.micrometer.core.annotation.Timed;
+
 @Component
 public class OutboxPoller {
 
@@ -27,6 +31,9 @@ public class OutboxPoller {
     }
 
     @Scheduled(fixedDelayString = "${outbox.poll.interval.ms:5000}")
+    @Timed("outbox.poll.duration")
+    @Retry(name = "outboxRetry")
+    @CircuitBreaker(name = "outboxCircuit")
     @Transactional
     public void pollAndPublish() throws JsonProcessingException {
         List<OutboxEvent> events = outboxRepository.findByPublishedFalseOrderByCreatedAtAsc();
@@ -56,6 +63,8 @@ public class OutboxPoller {
                     log.warn("Outbox id={} publish attempt {} failed", e.getId(), e.getAttempts(), ex);
                 }
                 outboxRepository.save(e);
+                // rethrow to allow resilience annotations to observe failures when appropriate
+                throw ex instanceof RuntimeException ? (RuntimeException) ex : new RuntimeException(ex);
             }
         }
     }

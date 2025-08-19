@@ -24,7 +24,22 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info
+        include: health,info,prometheus
+
+# Resilience4j defaults (tunable via env or config)
+resilience4j:
+  retry:
+    instances:
+      orderCreateRetry:
+        maxAttempts: 3
+        waitDuration: 200ms
+  circuitbreaker:
+    instances:
+      orderCreateCircuit:
+        registerHealthIndicator: true
+        slidingWindowSize: 20
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50
 
 # application-specific properties
 payments:

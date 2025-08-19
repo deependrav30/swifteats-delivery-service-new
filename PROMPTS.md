@@ -143,7 +143,7 @@ rabbitmq:
 
 **Realtime tracking:**
 - `tracking-query-service`:
-  - SSE endpoint `/orders/{id}/track` streaming latest driver coords.
+  - SSE endpoint `/drivers/{driverId}/location/stream` streaming latest driver coords.
   - Latest driver location stored in Redis (simple key or GEO); small recent-path buffer in Redis.
 
 **Performance:**

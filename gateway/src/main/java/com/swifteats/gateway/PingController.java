@@ -1,15 +1,17 @@
 package com.swifteats.gateway;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.util.Map;
 
-@RestController
-public class PingController {
+/**
+ * Helper (non-bean) Ping provider. The real REST endpoint lives in
+ * {@code com.swifteats.gateway.controller.PingController} so this class must not
+ * be a Spring bean to avoid duplicate bean name 'pingController'.
+ */
+public final class PingController {
 
-    @GetMapping("/ping")
-    public Map<String, String> ping() {
+    private PingController() {}
+
+    public static Map<String, String> pingMap() {
         return Map.of("status", "pong", "service", "gateway");
     }
 }

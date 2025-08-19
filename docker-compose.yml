@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   postgres:
-    image: postgres:16
+    image: postgres:14
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-swifteats}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-swifteats}
@@ -20,28 +20,106 @@ services:
     image: redis:7
     ports:
       - "6379:6379"
-    healthcheck:
-      test: ["CMD","redis-cli","ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
 
   rabbitmq:
-    # Switched to rabbitmq:3.11-management for better multi-arch/arm64 support on Apple Silicon
     image: rabbitmq:3.11-management
-    ports: ["5672:5672","15672:15672"]
-    healthcheck:
-      test: ["CMD-SHELL","rabbitmq-diagnostics -q ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
+    ports:
+      - "5672:5672"
+      - "15672:15672"
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-guest}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS:-guest}
 
+  gateway:
+    image: swifteats-gateway:local
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    profiles:
+      - services
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=${POSTGRES_DB:-swifteatsdb}
+      - POSTGRES_USER=${POSTGRES_USER:-swifteats}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-swifteats}
+      - REDIS_HOST=redis
+      - SPRING_FLYWAY_ENABLED=false
+
+  catalog-service:
+    image: swifteats-catalog-service:local
+    build:
+      context: ./catalog-service
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    profiles:
+      - services
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=${POSTGRES_DB:-swifteatsdb}
+      - POSTGRES_USER=${POSTGRES_USER:-swifteats}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-swifteats}
+      - REDIS_HOST=redis
+      - SPRING_FLYWAY_ENABLED=false
+
+  order-service:
+    image: swifteats-order-service:local
+    build:
+      context: ./order-service
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    profiles:
+      - services
+    depends_on:
+      - postgres
+      - rabbitmq
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=${POSTGRES_DB:-swifteatsdb}
+      - POSTGRES_USER=${POSTGRES_USER:-swifteats}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-swifteats}
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_USER=${RABBITMQ_USER:-guest}
+      - RABBITMQ_PASS=${RABBITMQ_PASS:-guest}
+      - SPRING_FLYWAY_ENABLED=false
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+
+  grafana:
+    image: grafana/grafana:9.5.0
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-admin}
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+
 networks:
-  default:
-    name: swifteats-network
+  default: {}
 
 volumes:
   postgres_data:
+  prometheus_data:
+  grafana_data:

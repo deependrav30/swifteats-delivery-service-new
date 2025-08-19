@@ -1,15 +1,24 @@
 server:
-  port: 8080
-  shutdown: graceful
+  server:
+    port: 8080
+    shutdown: graceful
 
-spring:
-  application:
-    name: gateway
-  lifecycle:
-    timeout-per-shutdown-phase: 30s
+  spring:
+    application:
+      name: gateway
+    lifecycle:
+      timeout-per-shutdown-phase: 30s
+    cloud:
+      gateway:
+        routes:
+          - id: catalog
+            uri: http://catalog-service:8081
+            predicates:
+              - Path=/restaurants/**
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: health,info
+

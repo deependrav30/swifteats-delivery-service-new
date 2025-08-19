@@ -6,6 +6,9 @@ import com.swifteats.order.model.OrderEntity;
 import com.swifteats.order.model.OutboxEvent;
 import com.swifteats.order.repo.OrderRepository;
 import com.swifteats.order.repo.OutboxRepository;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
+import io.micrometer.core.annotation.Timed;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +28,9 @@ public class OrderService {
     }
 
     @Transactional
+    @Timed("order.create.duration")
+    @Retry(name = "orderCreateRetry")
+    @CircuitBreaker(name = "orderCreateCircuit")
     public OrderEntity createOrder(OrderEntity order) throws JsonProcessingException {
         // idempotency by clientOrderId
         orderRepository.findByClientOrderId(order.getClientOrderId()).ifPresent(existing -> {

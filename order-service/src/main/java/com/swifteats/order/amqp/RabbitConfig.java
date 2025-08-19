@@ -35,6 +35,8 @@ public class RabbitConfig {
     public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory) {
         RabbitAdmin admin = new RabbitAdmin(connectionFactory);
         admin.setAutoStartup(true);
+        // avoid failing startup if broker isn't fully ready during tests; retries will redeclare when connection recovers
+        admin.setIgnoreDeclarationExceptions(true);
         return admin;
     }
 }

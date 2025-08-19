@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.swifteats.gateway.controller.PingControllerTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.575 s - in com.swifteats.gateway.controller.PingControllerTest
