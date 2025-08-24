@@ -2,3 +2,4 @@ com/swifteats/gateway/controller/PingController.class
 com/swifteats/gateway/controller/ProxyController.class
 com/swifteats/gateway/PingController.class
 com/swifteats/gateway/GatewayApplication.class
+com/swifteats/gateway/controller/OrdersProxyController.class

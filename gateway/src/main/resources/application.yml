@@ -8,17 +8,60 @@ server:
       name: gateway
     lifecycle:
       timeout-per-shutdown-phase: 30s
-    cloud:
-      gateway:
-        routes:
-          - id: catalog
-            uri: http://catalog-service:8081
-            predicates:
-              - Path=/restaurants/**
+    server:
+      port: 8080
+      shutdown: graceful
 
-  management:
-    endpoints:
-      web:
-        exposure:
-          include: health,info
+    spring:
+      application:
+        name: gateway
+      lifecycle:
+        timeout-per-shutdown-phase: 30s
+      cloud:
+        gateway:
+          routes:
+            - id: catalog
+              uri: http://catalog-service:8081
+              predicates:
+                - Path=/restaurants/**
+
+            # Route for orders API (rewrites /api/orders/** -> /orders/** on order-service)
+            - id: orders
+              uri: http://order-service:8082
+              predicates:
+                - Path=/api/orders
+                - Path=/api/orders/**
+              filters:
+                - 'RewritePath=/api/orders(?<segment>/.*)?,/orders${segment}'
+
+            - id: tracking-ingest
+              uri: http://tracking-ingest-service:8084
+              predicates:
+                - Path=/api/tracking
+                - Path=/api/tracking/**
+              filters:
+                - 'RewritePath=/api/tracking/(?<segment>.*),/\${segment}'
+
+            - id: simulator
+              uri: http://simulator:8086
+              predicates:
+                - Path=/api/simulator
+                - Path=/api/simulator/**
+              filters:
+                - 'RewritePath=/api/simulator/(?<segment>.*),/\${segment}'
+
+            # Optional payment mock route (service folder exists in repo)
+            - id: payment-mock
+              uri: http://payment-mock-service:8083
+              predicates:
+                - Path=/api/payment
+                - Path=/api/payment/**
+              filters:
+                - 'RewritePath=/api/payment/(?<segment>.*),/\${segment}'
+
+    management:
+      endpoints:
+        web:
+          exposure:
+            include: health,info
 

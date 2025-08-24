@@ -37,13 +37,11 @@ public class ResilienceConfig {
         IntervalFunction base = IntervalFunction.ofExponentialBackoff(100L, 2.0);
         IntervalFunction jittered = withJitter(base, 0.25);
 
-        RetryConfig config = RetryConfig.custom()
-                .maxAttempts(3)
-                .waitDuration(Duration.ofMillis(100))
-                .intervalFunction(jittered)
-                .retryExceptions(RuntimeException.class)
-                .ignoreExceptions(IllegalArgumentException.class)
-                .build();
+    RetryConfig config = RetryConfig.custom()
+        .maxAttempts(3)
+        .retryExceptions(RuntimeException.class)
+        .ignoreExceptions(IllegalArgumentException.class)
+        .build();
 
         RetryRegistry registry = RetryRegistry.of(config);
         // Return registry; metrics binder bean will expose metrics

@@ -36,7 +36,10 @@ public class OutboxPoller {
     @CircuitBreaker(name = "outboxCircuit")
     @Transactional
     public void pollAndPublish() throws JsonProcessingException {
+    // Temporary runtime diagnostic log to ensure the scheduled method is invoked
+    log.info("OutboxPoller.pollAndPublish invoked");
         List<OutboxEvent> events = outboxRepository.findByPublishedFalseOrderByCreatedAtAsc();
+    log.info("OutboxPoller found {} pending events", events.size());
         for (OutboxEvent e : events) {
             try {
                 amqpTemplate.convertAndSend("swifteats.order.events", e.getEventType(), e.getPayload());

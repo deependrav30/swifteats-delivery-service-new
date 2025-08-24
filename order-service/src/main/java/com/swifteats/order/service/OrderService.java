@@ -32,6 +32,11 @@ public class OrderService {
     @Retry(name = "orderCreateRetry")
     @CircuitBreaker(name = "orderCreateCircuit")
     public OrderEntity createOrder(OrderEntity order) throws JsonProcessingException {
+        // ensure clientOrderId exists (idempotency key)
+        if (order.getClientOrderId() == null || order.getClientOrderId().isBlank()) {
+            order.setClientOrderId(UUID.randomUUID().toString());
+        }
+
         // idempotency by clientOrderId
         orderRepository.findByClientOrderId(order.getClientOrderId()).ifPresent(existing -> {
             throw new IllegalStateException("order.already.exists");

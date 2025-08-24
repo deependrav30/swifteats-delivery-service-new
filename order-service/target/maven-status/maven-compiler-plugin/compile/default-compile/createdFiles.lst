@@ -2,6 +2,7 @@ com/swifteats/order/amqp/RabbitConnectionFactoryConfig.class
 com/swifteats/order/OrderApplication.class
 com/swifteats/order/amqp/PaymentResultListener.class
 com/swifteats/order/PingController.class
+com/swifteats/order/controller/DebugController.class
 com/swifteats/order/model/OutboxEvent.class
 com/swifteats/order/poller/OutboxPoller.class
 com/swifteats/order/model/OrderEntity.class
